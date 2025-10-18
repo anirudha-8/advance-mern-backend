@@ -4,7 +4,7 @@
 
 ## Phase 1: Foundation — Handling Errors and Writing Reliable Code
 
-**Topic 1 → Error Handling in Express 🛑**
+### Topic 1 → Error Handling in Express 🛑
 
 *📘 Why first:*
 
@@ -22,7 +22,7 @@ Before adding complex features like auth, caching, or sockets, you must understa
 
 ## Phase 2: Core Security — Authentication & Authorization 🪪
 
-**Topic 2 → Authentication and Authorization**
+### Topic 2 → Authentication and Authorization
 
 *📘 Why next:*
 
@@ -42,7 +42,7 @@ Once you can handle failures, the next critical skill is securing your APIs. Aut
 
 ## Phase 3: Scalability — Caching with Redis 🍄
 
-**Topic 3 → Working With Caching**
+### Topic 3 → Working With Caching
 
 *📘 Why third:*
 
@@ -60,7 +60,7 @@ Once you have a secure app, you’ll want it to perform well. Caching (especiall
 
 ## Phase 4: Interactivity — Real-Time Communication 💬
 
-**Topic 4 → WebSockets and Socket.io**
+### Topic 4 → WebSockets and Socket.io
 
 *📘 Why fourth:*
 
@@ -78,7 +78,7 @@ Now that you can handle secure, performant APIs — it’s time to make them rea
 
 ## Phase 5: Reliability — Testing Tools 🛠️
 
-**Topic 5 → Testing with Jest & Web Testing**
+### Topic 5 → Testing with Jest & Web Testing
 
 *📘 Why last:*
 
