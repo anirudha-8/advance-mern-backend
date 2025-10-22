@@ -1,20 +1,60 @@
+import AppError from "../utils/AppError";
+
 /**
- * Global error handling middleware
+ * Sends detailed error info during development
+ */
+const sendErrorDev = (err, res) => {
+	res.status(err.statusCode).json({
+		status: err.status,
+		message: err.message,
+		stack: err.stack,
+		error: err,
+	});
+};
+
+/**
+ * Sends minimal error info during production
+ */
+const sendErrorProd = (err, res) => {
+	// If the error is operational, send a safe message
+	if (err.isOperational) {
+		res.status(err.statusCode).json({
+			status: err.status,
+			message: err.message,
+		});
+	} else {
+		// Programming or unknown error: don't leak details
+		res.status(err.statusCode).json({
+			status: "error",
+			message: "Something went wrong!",
+		});
+	}
+};
+
+/**
+ * Global Error Handling Middleware
+ *
  * @param {Error} err - The error object
  * @param {Object} req - The request object
  * @param {Object} res - The response object
  * @param {Function} next - The next middleware function
  **/
 
-import AppError from "../utils/AppError";
-
 const globalErrorhandler = (err, req, res, next) => {
 	// set default values
 	err.statusCode = err.statusCode || 500;
-	err.message = err.message || "error";
+	err.status = err.status || "error";
 
-	// send error response
-	res.status(err.statusCode).json({ status: err.status, message: err.message });
+	if (process.env.NODE_ENV === "development") {
+		sendErrorDev(err, res);
+	} else if (process.env.NODE_ENV === "production") {
+		sendErrorProd(err, res);
+	} else {
+		res.status(err.statusCode).json({
+			status: err.status,
+			message: err.message,
+		});
+	}
 };
 
 // Handle unhandled routes (404)
