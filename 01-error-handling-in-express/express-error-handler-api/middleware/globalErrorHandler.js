@@ -31,6 +31,19 @@ const sendErrorProd = (err, res) => {
 	}
 };
 
+// Mongoose CastError (Invalid ID format)
+const handleCastErrorDB = (err) => {
+	const message = `Invalid ${err.path}: ${err.value}.`;
+	return new AppError(message, 400);
+};
+
+// Mongoose ValidationError (Schema validation fails)
+const handleValidationErrorDB = (err) => {
+	const errors = Object.values(err.errors).map((el) => el.message);
+	const message = `Invalid input data. ${errors.json(". ")}`;
+	return new AppError(message, 400);
+};
+
 /**
  * Global Error Handling Middleware
  *
