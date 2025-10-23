@@ -61,7 +61,17 @@ const globalErrorhandler = (err, req, res, next) => {
 	if (process.env.NODE_ENV === "development") {
 		sendErrorDev(err, res);
 	} else if (process.env.NODE_ENV === "production") {
-		sendErrorProd(err, res);
+		let error = { ...err };
+		error.message = err.message;
+
+		// Handle specific Mongoose errors
+		if (err.name === "CastError") {
+			error = handleCastErrorDB(err);
+		}
+		if (err.name === "ValidationError") {
+			error = handleValidationErrorDB(err);
+		}
+		sendErrorProd(error, res);
 	} else {
 		res.status(err.statusCode).json({
 			status: err.status,
