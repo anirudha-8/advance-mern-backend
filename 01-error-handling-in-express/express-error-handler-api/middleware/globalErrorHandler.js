@@ -50,6 +50,14 @@ const handleValidationErrorDB = (err) => {
 	return new AppError(message, 400);
 };
 
+// Mongoose Duplicate Key Error
+const handleDuplicateFieldsDB = (err) => {
+	const field = Object.keys(err.keyValue)[0];
+	const value = err.keyValue[field];
+	const message = `Duplicate field value: "${value}". Please, use another ${field}`;
+	return new AppError(message, 400);
+};
+
 /**
  * Global Error Handling Middleware
  *
