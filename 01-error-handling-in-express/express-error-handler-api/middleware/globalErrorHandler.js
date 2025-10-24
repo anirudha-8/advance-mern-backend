@@ -78,12 +78,15 @@ const globalErrorhandler = (err, req, res, next) => {
 		let error = { ...err };
 		error.message = err.message;
 
-		// Handle specific Mongoose errors
+		// Handle specific MongoDB / Mongoose errors
 		if (err.name === "CastError") {
 			error = handleCastErrorDB(err);
 		}
 		if (err.name === "ValidationError") {
 			error = handleValidationErrorDB(err);
+		}
+		if (err.code === 11000) {
+			error = handleDuplicateFieldsDB(err);
 		}
 		sendErrorProd(error, res);
 	} else {
