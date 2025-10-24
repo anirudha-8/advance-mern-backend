@@ -31,6 +31,12 @@ const sendErrorProd = (err, res) => {
 	}
 };
 
+/**
+ * =========================================== *
+ * ========= Mongoose Error Handling ========= *
+ * =========================================== *
+ */
+
 // Mongoose CastError (Invalid ID format)
 const handleCastErrorDB = (err) => {
 	const message = `Invalid ${err.path}: ${err.value}.`;
