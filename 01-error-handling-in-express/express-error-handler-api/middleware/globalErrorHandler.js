@@ -99,6 +99,12 @@ const globalErrorhandler = (err, req, res, next) => {
 		if (err.code === 11000) {
 			error = handleDuplicateFieldsDB(err);
 		}
+
+		// Handle JWT errors
+		if (err.name === "JsonWebTokenError") {
+			error = handleJWTError();
+		}
+
 		sendErrorProd(error, res);
 	} else {
 		res.status(err.statusCode).json({
