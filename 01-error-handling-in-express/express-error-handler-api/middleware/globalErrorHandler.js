@@ -59,6 +59,17 @@ const handleDuplicateFieldsDB = (err) => {
 };
 
 /**
+ * ============================================ *
+ * ============ JWT Error Handling ============ *
+ * ============================================ *
+ */
+
+// Invalid JWT token
+const handleJWTError = () => {
+	new AppError("Invalid token. Please log in again!", 401);
+};
+
+/**
  * Global Error Handling Middleware
  *
  * @param {Error} err - The error object
