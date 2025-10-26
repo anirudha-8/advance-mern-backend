@@ -69,6 +69,11 @@ const handleJWTError = () => {
 	new AppError("Invalid token. Please log in again!", 401);
 };
 
+// Expired JWT token
+const handleJWTExpiredError = () => {
+	new AppError("Your token has expired! Please log in again!", 401);
+};
+
 /**
  * Global Error Handling Middleware
  *
