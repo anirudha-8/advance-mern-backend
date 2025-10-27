@@ -27,10 +27,10 @@ app.get(
 	})
 );
 
-// For unhandled routes
+// Handle all undefined routes
 app.all("*", handleNotFound);
 
-// Global error middleware
+// Centralized global error middleware
 app.use(globalErrorhandler);
 
 export default app;
