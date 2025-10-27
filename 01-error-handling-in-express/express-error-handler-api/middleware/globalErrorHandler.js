@@ -122,9 +122,12 @@ const globalErrorhandler = (err, req, res, next) => {
 	}
 };
 
-// Handle unhandled routes (404)
+/**
+ * =============== Handle unhandled routes (404) =============== *
+ */
 export const handleNotFound = (req, res, next) => {
-	next(new AppError(`Cannot find ${req.originalUrl} on this server!`, 400));
+	const message = `The requested URL ${req.originalUrl} was not found on this server!`;
+	next(new AppError(message, 404));
 };
 
 export default globalErrorhandler;
