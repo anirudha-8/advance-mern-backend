@@ -1,4 +1,5 @@
 import AppError from "../utils/AppError";
+import logger from "../utils/logger";
 
 /**
  * Sends detailed error info during development
@@ -24,10 +25,8 @@ const sendErrorProd = (err, res) => {
 		});
 	} else {
 		// Programming or unknown error: don't leak details
-		res.status(err.statusCode).json({
-			status: "error",
-			message: "Something went wrong!",
-		});
+		console.log("Error: ", err);
+		logger.error(`${err.name}: ${err.message}`);
 	}
 };
 
