@@ -1,5 +1,5 @@
-import AppError from "../utils/AppError";
-import logger from "../utils/logger";
+import AppError from "../utils/AppError.js";
+import logger from "../utils/logger.js";
 
 /**
  * Sends detailed error info during development
@@ -27,6 +27,12 @@ const sendErrorProd = (err, res) => {
 		// Programming or unknown error: don't leak details
 		console.log("Error: ", err);
 		logger.error(`${err.name}: ${err.message}`);
+
+		// send generic message
+		res.status(500).json({
+			status: "error",
+			message: "Something went very wrong!",
+		});
 	}
 };
 
@@ -45,7 +51,7 @@ const handleCastErrorDB = (err) => {
 // Mongoose ValidationError (Schema validation fails)
 const handleValidationErrorDB = (err) => {
 	const errors = Object.values(err.errors).map((el) => el.message);
-	const message = `Invalid input data. ${errors.json(". ")}`;
+	const message = `Invalid input data. ${errors.join(". ")}`;
 	return new AppError(message, 400);
 };
 
@@ -65,12 +71,12 @@ const handleDuplicateFieldsDB = (err) => {
 
 // Invalid JWT token
 const handleJWTError = () => {
-	new AppError("Invalid token. Please log in again!", 401);
+	return new AppError("Invalid token. Please log in again!", 401);
 };
 
 // Expired JWT token
 const handleJWTExpiredError = () => {
-	new AppError("Your token has expired! Please log in again!", 401);
+	return new AppError("Your token has expired! Please log in again!", 401);
 };
 
 /**

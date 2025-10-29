@@ -2,7 +2,7 @@
 	"name": "express-error-handler-api",
 	"version": "1.0.0",
 	"description": "Learn how to handle errors professionally in an Express backend — covering custom error classes, centralized error handling middleware, and meaningful error responses for the client.",
-	"main": "index.js",
+	"main": "server.js",
 	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
