@@ -1,12 +1,14 @@
 {
-  "name": "express-token-based-auth",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+	"name": "express-token-based-auth",
+	"version": "1.0.0",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js",
+		"dev": "nodemon server.js"
+	},
+	"keywords": [],
+	"author": "Anirudha Bele",
+	"license": "ISC",
+	"description": "A mini-project to demonstrate practical implementation of Authentication & Authorization"
 }
