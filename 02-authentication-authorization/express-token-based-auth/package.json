@@ -10,5 +10,8 @@
 	"keywords": [],
 	"author": "Anirudha Bele",
 	"license": "ISC",
-	"description": "A mini-project to demonstrate practical implementation of Authentication & Authorization"
+	"description": "A mini-project to demonstrate practical implementation of Authentication & Authorization",
+	"dependencies": {
+		"express": "^5.1.0"
+	}
 }
