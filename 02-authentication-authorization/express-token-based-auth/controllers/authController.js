@@ -1,4 +1,12 @@
 import User from "../models/User.js";
+import jwt from "jsonwebtoken";
+
+// generate JWT token
+const generateToken = (id) => {
+	return jwt.sign({ id }, process.env.JWT_SECRET, {
+		expiresIn: "1d", // 1 day expiry
+	});
+};
 
 /**
  * Register Controller
@@ -30,6 +38,7 @@ export const registerUser = async (req, res) => {
 			name: newUser.name,
 			email: newUser.email,
 			role: newUser.role,
+			token: generateToken(newUser._id),
 		});
 	} catch (error) {
 		console.error("Error in registration of user: ", error);
