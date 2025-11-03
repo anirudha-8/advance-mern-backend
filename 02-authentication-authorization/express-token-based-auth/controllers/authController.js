@@ -45,3 +45,13 @@ export const registerUser = async (req, res) => {
 		res.status(500).json({ message: "Internal Server Error!" });
 	}
 };
+
+// login controller
+
+export const loginUser = async (req, res) => {
+	try {
+	} catch (error) {
+		console.error("Error in login of user: ", error);
+		res.status(500).json({ message: "Internal Server Error!" });
+	}
+};
