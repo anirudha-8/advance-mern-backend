@@ -50,6 +50,35 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
 	try {
+		const { email, password } = req.body;
+
+		// validate input
+		if (!email || !password) {
+			return res
+				.status(400)
+				.json({ message: "Email and password are required!" });
+		}
+
+		// check if user exist or not
+		const user = User.findOne({ email });
+		if (!user) {
+			return res.status(400).json({ message: "Invalid Credentials!" });
+		}
+
+		// check password matched or not
+		const isPasswordMatch = User.matchPassword(password);
+		if (!isPasswordMatch) {
+			return res.status(400).json({ message: "Invalid Password!" });
+		}
+
+		// send success response with JWT
+		res.status(200).json({
+			_id: user._id,
+			name: user.name,
+			email: user.email,
+			role: user.role,
+			token: generateToken(user._id),
+		});
 	} catch (error) {
 		console.error("Error in login of user: ", error);
 		res.status(500).json({ message: "Internal Server Error!" });
