@@ -11,7 +11,7 @@ const generateToken = (id) => {
 /**
  * Register Controller
  * @desc 	Register new user
- * @route 	GET /auth/register
+ * @route 	POST /auth/register
  * @access 	Public
  */
 export const registerUser = async (req, res) => {
@@ -46,7 +46,12 @@ export const registerUser = async (req, res) => {
 	}
 };
 
-// login controller
+/**
+ * Login Controller
+ * @desc 	login user
+ * @route 	POST /auth/register
+ * @access 	Public
+ */
 
 export const loginUser = async (req, res) => {
 	try {
