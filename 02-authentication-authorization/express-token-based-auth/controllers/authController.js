@@ -64,16 +64,16 @@ export const loginUser = async (req, res) => {
 				.json({ message: "Email and password are required!" });
 		}
 
-		// check if user exist or not
-		const user = User.findOne({ email });
+		// check if user exists and get password field
+		const user = await User.findOne({ email }).select("+password");
 		if (!user) {
-			return res.status(400).json({ message: "Invalid Credentials!" });
+			return res.status(401).json({ message: "Invalid credentials!" });
 		}
 
-		// check password matched or not
-		const isPasswordMatch = User.matchPassword(password);
+		// check password matched or not (use instance method)
+		const isPasswordMatch = await user.matchPassword(password);
 		if (!isPasswordMatch) {
-			return res.status(400).json({ message: "Invalid Password!" });
+			return res.status(401).json({ message: "Invalid credentials!" });
 		}
 
 		// send success response with JWT
