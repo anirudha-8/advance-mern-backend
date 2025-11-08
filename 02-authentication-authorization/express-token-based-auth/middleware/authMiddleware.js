@@ -38,7 +38,7 @@ export const protect = async (req, res, next) => {
 
 // Role Based Access Control Middleware
 export const authorize = (...roles) => {
-	return (req, res, nex) => {
+	return (req, res, next) => {
 		if (!roles.includes(req.user.role)) {
 			return res
 				.status(403)
