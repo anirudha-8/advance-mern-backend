@@ -19,7 +19,7 @@ router.get("/me", protect, (req, res) => {
 });
 
 // admin-only route
-router.get("/admin", protect, authorize(admin), (req, res) => {
+router.get("/admin", protect, authorize("admin"), (req, res) => {
 	res.status(200).json({
 		message: `Welcome Admin, ${req.user.name}`,
 	});
